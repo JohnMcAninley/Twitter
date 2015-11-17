@@ -28,12 +28,12 @@ def follow_and_retweet(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET,
 
             try:
                 tweet = bot.show_status(id = tweet_id)
-                bot.create_friendship(id = tweet['user']['id_str']) 
-                bot.retweet(id = tweet_id)
+                if tweet['retweeted'] == False:
+                    bot.create_friendship(id = tweet['user']['id_str']) 
+                    bot.retweet(id = tweet_id)
+                    time_queue.put(time.time())
             except TwythonError as e:
                 print e
-
-            time_queue.put(time.time())
 
 def main():
 
@@ -57,7 +57,11 @@ def main():
 
     thread.start()
 
-    stream.statuses.filter(track='RT giveaway, RT win, retweet giveaway, retweet win')
+    while True:
+        try:
+            stream.statuses.filter(track='RT giveaway, RT win, retweet giveaway, retweet win')
+        except Exception as e:
+            print e
 
 """
     for result in results["statuses"]:
