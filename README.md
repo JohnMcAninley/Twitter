@@ -17,3 +17,9 @@ TwitterContestBot
   replacing the respective fields with your twitter authentication information.
   
   In TwitterContestBot.py change CFG_FILENAME to the file you created.
+  
+SoupNaziBot
+
+  This bot finds tweets expressing a desire for soup and responds with "No soup for you!"
+  
+  Usage: See TwitterContestBot useag.
